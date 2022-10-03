@@ -11,17 +11,20 @@ public class serverStr
     String modificato = null;
     BufferedReader reader;
     DataOutputStream writer;
+    Boolean connected =false;
 
     public Socket attendi()
     {
         try
         {
-            System.out.println("SERVER partito in esecuzione ...");
             server = new ServerSocket(25565);
-            client = server.accept();
-            server.close();
-            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            writer = new DataOutputStream(client.getOutputStream());
+            while (true)
+            {
+                client = server.accept();
+                reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                writer = new DataOutputStream(client.getOutputStream());
+                comunica();
+            }
         }
         catch(Exception e)
         {
@@ -43,6 +46,8 @@ public class serverStr
             writer.writeBytes(modificato + "\n");
             System.out.println("invio risultati");
             client.close();
+            System.out.println("disconnessione effettuata");
+            System.out.println("porta libera");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

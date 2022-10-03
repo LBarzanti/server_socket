@@ -9,11 +9,8 @@ public class App
     public static void main(String args[])
     {
         serverStr servente = new serverStr();
-       while (true)
-       {
-            servente.attendi();
-            servente.comunica();
-       }
+        System.out.println("SERVER partito in esecuzione ...");
+        servente.attendi();
     }
 }
 
